@@ -1,0 +1,16 @@
+name: Build Godot APK
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Godot Export
+        uses: firebelley/godot-export@v5.2.0
+        with:
+          godot: 3.5.3
+          export-debug: true
