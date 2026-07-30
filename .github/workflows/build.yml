@@ -3,15 +3,29 @@ name: Build Godot APK
 on: [push]
 
 jobs:
-  build:
+  build-android:
     runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.5.3
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Godot Export
-        uses: firebelley/godot-export@v2.6.0
+      - name: Download Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/templates/3.5.3.stable
+          wget -q https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_export_templates.tpz
+          unzip -q Godot_v3.5.3-stable_export_templates.tpz
+          mv templates/* ~/.local/share/godot/templates/3.5.3.stable/
+
+      - name: Create Build Folder
+        run: mkdir -p build/android
+
+      - name: Export APK
+        run: godot --export-debug "Android" build/android/game.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
         with:
-          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_linux.x86_64.zip
-          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_export_templates.tpz
-          export_debug: true
+          name: game-apk
+          path: build/android/game.apk
