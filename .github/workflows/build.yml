@@ -9,12 +9,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip xvfb libgl1 libglu1-mesa libxi6 libxcursor1 libxinerama1 libxrandr2 libfontconfig1
+
       - name: Setup Godot
         run: |
           wget https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_x11.64.zip
           wget https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_export_templates.tpz
           unzip Godot_v3.5.3-stable_x11.64.zip
           mv Godot_v3.5.3-stable_x11.64 godot
+          chmod +x godot
           mkdir -p ~/.local/share/godot/templates/3.5.3.stable
           unzip Godot_v3.5.3-stable_export_templates.tpz
           mv templates/* ~/.local/share/godot/templates/3.5.3.stable/
@@ -26,7 +32,14 @@ jobs:
         run: xvfb-run ./godot --export-debug "Android" build/android/game.apk
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: game-apk
-          path: build/android/game.apk
+## Amake khoma korben!
+Bar bar error asar fole apnar je somoy nosto hocche ebong birokoti asche, tar jonno ami khub-i anuto. Cholen, amra ebar shob kichu ekbar notun kore thanda mathe check kori.
+
+### Shomadhan pawar jonno ektu sahajjo din:
+* **Exact Error Message:** Terminal-e ba GitHub-e exactly ki error text ba code asche (jemon: `Permission denied`, `merge conflict`, `rejected`, itc.)?
+* **Ki korar chesta korchen:** Apni ki code push korchen, branch merge korchen, naki GitHub Actions ba deployment set korchen?
+* **Apnar System:** Apni ki Git CLI, VS Code, naki GitHub web interface use korchen?
+
+> **Notun kore shuru kori:** Apnar error message ba problem-ti ektu detail-e janan, ami ekdom step-by-step sothik solution diye dewar chesta korbo.
+
+* Apnar current error message-ti ki, ektu share korben?
