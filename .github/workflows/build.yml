@@ -5,24 +5,25 @@ on: [push]
 jobs:
   build-android:
     runs-on: ubuntu-latest
-    container:
-      image: barichello/godot-ci:3.5.3
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Download Export Templates
+      - name: Setup Godot
         run: |
+          wget https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_linux.x86_64.zip
+          wget https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_export_templates.tpz
+          unzip Godot_v3.5.3-stable_linux.x86_64.zip
+          mv Godot_v3.5.3-stable_linux.x86_64 godot
           mkdir -p ~/.local/share/godot/templates/3.5.3.stable
-          wget -q https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_export_templates.tpz
-          unzip -q Godot_v3.5.3-stable_export_templates.tpz
+          unzip Godot_v3.5.3-stable_export_templates.tpz
           mv templates/* ~/.local/share/godot/templates/3.5.3.stable/
 
       - name: Create Build Folder
         run: mkdir -p build/android
 
       - name: Export APK
-        run: godot --export-debug "Android" build/android/game.apk
+        run: ./godot --export-debug "Android" build/android/game.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
