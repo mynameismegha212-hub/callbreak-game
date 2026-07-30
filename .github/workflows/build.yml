@@ -25,7 +25,7 @@ jobs:
         run: godot --export-debug "Android" build/android/game.apk
 
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game-apk
           path: build/android/game.apk
