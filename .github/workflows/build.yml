@@ -23,7 +23,7 @@ jobs:
         run: mkdir -p build/android
 
       - name: Export APK
-        run: ./godot --export-debug "Android" build/android/game.apk
+        run: xvfb-run ./godot --export-debug "Android" build/android/game.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
