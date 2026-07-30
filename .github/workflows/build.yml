@@ -32,14 +32,7 @@ jobs:
         run: xvfb-run ./godot --export-debug "Android" build/android/game.apk
 
       - name: Upload APK
-## Amake khoma korben!
-Bar bar error asar fole apnar je somoy nosto hocche ebong birokoti asche, tar jonno ami khub-i anuto. Cholen, amra ebar shob kichu ekbar notun kore thanda mathe check kori.
-
-### Shomadhan pawar jonno ektu sahajjo din:
-* **Exact Error Message:** Terminal-e ba GitHub-e exactly ki error text ba code asche (jemon: `Permission denied`, `merge conflict`, `rejected`, itc.)?
-* **Ki korar chesta korchen:** Apni ki code push korchen, branch merge korchen, naki GitHub Actions ba deployment set korchen?
-* **Apnar System:** Apni ki Git CLI, VS Code, naki GitHub web interface use korchen?
-
-> **Notun kore shuru kori:** Apnar error message ba problem-ti ektu detail-e janan, ami ekdom step-by-step sothik solution diye dewar chesta korbo.
-
-* Apnar current error message-ti ki, ektu share korben?
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-apk
+          path: build/android/game.apk
