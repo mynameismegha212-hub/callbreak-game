@@ -11,10 +11,10 @@ jobs:
 
       - name: Setup Godot
         run: |
-          wget https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_linux.x86_64.zip
+          wget https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_x11.64.zip
           wget https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_export_templates.tpz
-          unzip Godot_v3.5.3-stable_linux.x86_64.zip
-          mv Godot_v3.5.3-stable_linux.x86_64 godot
+          unzip Godot_v3.5.3-stable_x11.64.zip
+          mv Godot_v3.5.3-stable_x11.64 godot
           mkdir -p ~/.local/share/godot/templates/3.5.3.stable
           unzip Godot_v3.5.3-stable_export_templates.tpz
           mv templates/* ~/.local/share/godot/templates/3.5.3.stable/
