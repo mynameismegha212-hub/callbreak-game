@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Godot Export
-        uses: uses: firebelley/godot-export@v2.6.0
+        uses: firebelley/godot-export@v2.6.0
         with:
           godot: 3.5.3
           export-debug: true
